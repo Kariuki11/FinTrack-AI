@@ -3,7 +3,7 @@ import { SignIn } from '@clerk/nextjs'
 
 const page = () => {
   return (
-    return <SignIn />
+    <SignIn />
   )
 }
 
