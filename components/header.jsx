@@ -1,5 +1,7 @@
-import React from 'react'
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
+// import { SignedIn, SignedOut, UserButton, SignInButton } from '@clerk/nextjs';
+
+import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/nextjs"
+
 
 const Header = () => {
   return (
@@ -15,3 +17,4 @@ const Header = () => {
 }
 
 export default Header
+
