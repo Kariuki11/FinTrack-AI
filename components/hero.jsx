@@ -72,6 +72,7 @@ const HeroSection = () => {
 
 export default HeroSection;
 
+// 59:02 minutes
 
 
 
