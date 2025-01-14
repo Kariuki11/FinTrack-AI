@@ -1,6 +1,8 @@
-# ExpenseGenie
+# Stiil in Production.
 
-ExpenseGenie is an AI-powered financial management platform designed to help users take control of their spending habits. This application empowers users to track their expenses, plan budgets, and gain valuable insights through personalized AI-driven recommendations. With an intuitive interface and advanced features, ExpenseGenie simplifies the way you manage your finances.
+# FinTrackAI
+
+FinTrackAI is an AI-powered financial management platform designed to help users take control of their spending habits. This application empowers users to track their expenses, plan budgets, and gain valuable insights through personalized AI-driven recommendations. With an intuitive interface and advanced features, ExpenseGenie simplifies the way you manage your finances.
 
 ---
 
@@ -27,7 +29,7 @@ ExpenseGenie is an AI-powered financial management platform designed to help use
 ## Tech Stack
 
 - **Frontend:** React.js, Tailwind CSS, Next.js
-- **Backend:** Node.js, Prisma ORM, PostgreSQL
+- **Backend:** Node.js, Prisma ORM, SQL
 - **Authentication:** Clerk.js for secure and easy login/signup.
 - **AI Integration:** OpenAI for generating insights and predictions.
 
