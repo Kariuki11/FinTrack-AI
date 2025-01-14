@@ -3,6 +3,7 @@ import {Button} from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card";
 import { featuresData, howItWorksData, statsData, testimonialsData } from "@/data/landing";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -32,8 +33,12 @@ export default function Home() {
               <Card key={index} className="p-6">
                 <CardContent className="space-y-4 pt-4">
                     {feature.icon}
-                    <h3 className="text-xl font-semibold">{feature.title}</h3>
-                    <p className="text-gray-600">{feature.description}</p>
+                    <h3 className="text-xl font-semibold">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-600">
+                      {feature.description}
+                    </p>
                 </CardContent>
               </Card>
             ))}
@@ -76,8 +81,12 @@ export default function Home() {
                           className="rounded-full"
                         />
                         <div className="ml-4">
-                          <div className="font-semibold">{testimonial.name}</div>
-                          <div className="text-sm text-gray-600">{testimonial.role}</div>
+                          <div className="font-semibold">
+                            {testimonial.name}
+                          </div>
+                          <div className="text-sm text-gray-600">
+                            {testimonial.role}
+                          </div>
                         </div>
                     </div>
                     <p className="text-gray-600">{testimonial.quote}</p>
@@ -85,6 +94,25 @@ export default function Home() {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-blue-700">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="3xl font-bold text-white text-center mb-5">
+          Your Journey to Financial Freedom Starts Here
+          </h1>
+          <p className="text-blue-200 mb-8 max-w-2xl mx-auto">
+            Simplify your budgeting, track expenses effortlessly, and make smarter financial decisions today.
+          </p>
+          <Link href="/dashboard">
+            <button
+              size="lg"
+              className="bg-white text-blue-800 hover:bg-blue-50 animate-bounce px-6 py-3 text-lg md:text-xl"
+            >
+              Start Free Trial
+            </button>
+          </Link>
         </div>
       </section>
 
