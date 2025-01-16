@@ -24,6 +24,7 @@ import { Select,
 import { Switch } from "./ui/switch";
 import useFetch from "@/hooks/use-fetch"
 import { createAccount } from "@/actions/dashboard";
+import { Loader2 } from "lucide-react";
 
 const CreateAccountDrawer = ({ children }) => {
   const [open, setOpen] = useState(false);
@@ -138,8 +139,13 @@ const {
                   </Button>
                 </DrawerClose>
 
-                <Button type="submit" className="flex-1">
-                  Create Account
+                <Button
+                  type="submit" 
+                  className="flex-1"
+                  disabled="createAccountLoading"
+                >
+                  {createAccountLoading?<><Loader2 className="mr-2 h-4 w-4 animate-spin"/>
+                    Creating Account...</> "Create Account"}
                 </Button>
               </div>
 
@@ -152,5 +158,3 @@ const {
 
 export default CreateAccountDrawer;
 
-
-//1hr 58 minutes 13 seconds
