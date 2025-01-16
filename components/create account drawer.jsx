@@ -22,6 +22,8 @@ import { Select,
           SelectValue 
         } from "./ui/select";
 import { Switch } from "./ui/switch";
+import useFetch from "@/hooks/use-fetch"
+import { createAccount } from "@/actions/dashboard";
 
 const CreateAccountDrawer = ({ children }) => {
   const [open, setOpen] = useState(false);
@@ -43,9 +45,15 @@ const {
     },
   });
 
+  const { data: newAccount,
+    error,
+    fn: createAccountFn,
+    loading: createAccountLoading,
+  }useFetch(createAccount)
+
   const onSubmit=async(data)=>{
-    console.log(data);
-  }
+    await createAccountFn(data);
+  };
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>

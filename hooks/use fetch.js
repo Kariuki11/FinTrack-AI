@@ -16,7 +16,10 @@ const useFetch = (cb) => {
         setData(response);
         setError(null)
     } catch (error) {
-        
+        setError(error);
+        toast.error(error.message);        
+    } finally {
+        setLoading(false)
     }
 
     return{ data, loading, error, fn, setData };
