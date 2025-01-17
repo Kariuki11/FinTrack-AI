@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import useFetch from "@/hooks/use fetch"
 import { 
   Drawer, 
   DrawerClose, 
@@ -15,16 +16,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod"
 import { accountSchema } from "@/app/lib/schema";
 import { Input } from "@/components/ui/input";
-import { Select,
-          SelectContent,
-          SelectItem,
-          SelectTrigger,
-          SelectValue 
-        } from "./ui/select";
-import { Switch } from "./ui/switch";
-import useFetch from "@/hooks/use-fetch"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { createAccount } from "@/actions/dashboard";
-import { Loader2 } from "lucide-react";
 
 const CreateAccountDrawer = ({ children }) => {
   const [open, setOpen] = useState(false);
@@ -46,15 +39,17 @@ const {
     },
   });
 
-  const { data: newAccount,
-    error,
-    fn: createAccountFn,
+  const {
     loading: createAccountLoading,
-  }useFetch(createAccount)
+    fn: createAccountFn,
+    error,
+    data: newAccount,
+  } = useFetch(createAccount);
 
-  const onSubmit=async(data)=>{
+  const onSubmit = async (data) => {
     await createAccountFn(data);
   };
+
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
@@ -64,7 +59,7 @@ const {
           <DrawerTitle>Create Account</DrawerTitle>
         </DrawerHeader>
         <div className="px-4 pb-4">
-            <form className="space-x-4" onSubmit={handleSubmit(onSubmit)}>
+            <form className="space-x-4">
 
               <div className="space-y-2">
                 <label htmlFor="name" className="text-sm font-medium">Account Name</label>
@@ -82,10 +77,9 @@ const {
                 <label htmlFor="type" className="text-sm font-medium">
                   Account Type
                 </label>
-                <Select
-                    onValueChange={(value) => setValue("type", value)}
-                    defaultValue={watch("type")}
-                >
+                <Select onValueChange={(value) => setValue("type", value)}
+                  defaultValue={watch("type")}
+                  >
                   <SelectTrigger id="type">
                     <SelectValue placeholder="Select Type" />
                   </SelectTrigger>
@@ -100,38 +94,6 @@ const {
                 )}
               </div>
 
-              <div className="space-y-2">
-                <label htmlFor="balance" className="text-sm font-medium">
-                  Initial Balannce
-                </label>
-                <Input
-                  id="balance"
-                  type="number"
-                  step="0.01"
-                  placeholder="$0.00"
-                  {...register("balance")}
-                />
-                {errors.balance && (
-                  <p className="text-sm text-red-800">{errors.balance.message}</p>
-                )}
-              </div>
-
-              <div className="flex items-center justify-between rounded-lg border p-3">
-
-                <div className="space-y-0.5">
-                  <label htmlFor="isDefault" className="text-sm font-medium cursor-pointer">
-                    Set as Default
-                  </label>
-
-                  <p className="text-sm text-muted-foreground">This account will be selected by default for transactions.</p>
-                </div>
-                <Switch
-                  id="isDefault"
-                    onCheckedChange={(checked) => setValue("isDefault", checked)}
-                    checked={watch("isDefault")}
-                  />
-              </div>
-
               <div className="flex gap-4 pt-4">
                 <DrawerClose asChild>
                   <Button type="button" variant="outline" className="flex-1">
@@ -142,10 +104,16 @@ const {
                 <Button
                   type="submit" 
                   className="flex-1"
-                  disabled="createAccountLoading"
+                  disabled={createAccountLoading}
                 >
-                  {createAccountLoading?<><Loader2 className="mr-2 h-4 w-4 animate-spin"/>
-                    Creating Account...</> "Create Account"}
+                  {createAccountLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin"/>
+                      Creating Account...
+                    </>
+                    ) : (
+                      "Create Account"
+                    )}
                 </Button>
               </div>
 

@@ -1,28 +1,62 @@
-const { useState } = require("react");
-const { useFormState } = require("react-dom");
+import { useState } from "react";
+import { toast } from "sonner";
 
 const useFetch = (cb) => {
-    const [data, setData] = useFormState(undefined);
-    const [loading, setLoading] = useState(null);
-    const [error, setError] = useState(null);
+  const [data, setData] = useState(undefined);
+  const [loading, setLoading] = useState(null);
+  const [error, setError] = useState(null);
 
-    const fn = async (...args) => {
-        setLoading(true);
-        setError(null);
-    };
+  const fn = async (...args) => {
+    setLoading(true);
+    setError(null);
 
     try {
-        const response = await cb(...args);
-        setData(response);
-        setError(null)
+      const response = await cb(...args);
+      setData(response);
+      setError(null);
     } catch (error) {
-        setError(error);
-        toast.error(error.message);        
+      setError(error);
+      toast.error(error.message);
     } finally {
-        setLoading(false)
+      setLoading(false);
     }
+  };
 
-    return{ data, loading, error, fn, setData };
+  return { data, loading, error, fn, setData };
 };
 
-export default useFetch
+export default useFetch;
+
+
+
+
+
+
+// / const { useState } = require("react");
+// const { useFormState } = require("react-dom");
+
+// const useFetch = (cb) => {
+//     const [data, setData] = useFormState(undefined);
+//     const [loading, setLoading] = useState(null);
+//     const [error, setError] = useState(null);
+
+//     const fn = async (...args) => {
+//         setLoading(true);
+//         setError(null);
+//     };
+
+//     try {
+//         const response = await cb(...args);
+//         setData(response);
+//         setError(null)
+//     } catch (error) {
+//         setError(error);
+//         toast.error(error.message);        
+//     } finally {
+//         setLoading(false)
+//     }
+
+//     return{ data, loading, error, fn, setData };
+// };
+
+// export default useFetch
