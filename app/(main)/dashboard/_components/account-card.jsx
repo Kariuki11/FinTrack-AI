@@ -10,9 +10,9 @@ const AccountCard = ({ account }) => {
     <div>
         <Card className="hover:shadow-md transition-shadow group relative">
             <Link href={`/account/${id}`}>
-                <CardHeader >
-                    <CardTitle>{name}</CardTitle>
-                    <Switch />
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                    <CardTitle className="text-sm font-medium capitalize">{name}</CardTitle>
+                    <Switch checked={isDefault} />
                 </CardHeader>
                 <CardContent>
                     <div className="text-2xl font-bold">
@@ -22,7 +22,7 @@ const AccountCard = ({ account }) => {
                         {type.charAt(0) + type.slice(1).toLowerCase()} Account
                     </p>
                 </CardContent>
-                <CardFooter>
+                <CardFooter className="flex justify-between text-sm text-muted-foreground">
                     <div className="flex items-center">
                         <ArrowUpRight className="mr-1 h-4 w-4 text-green-700"/>
                         Income
