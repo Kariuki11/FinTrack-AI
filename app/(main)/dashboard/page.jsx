@@ -8,7 +8,6 @@ import AccountCard from './_components/account-card';
 const Dashboard = async () => {
   const accounts = await getUserAccounts();
 
-  console.log(accounts)
 
   return (
     <div className="px-5">
