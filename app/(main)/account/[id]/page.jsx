@@ -1,6 +1,7 @@
 import { getAccountWithTransactions } from '@/actions/accounts'
 import { notFound } from 'next/navigation';
-import React from 'react'
+import React, { Suspense } from 'react'
+import TransactionTable from '../_components/transaction-table';
 
 const AccountsPage = async ({params}) => {
     const accountData = await getAccountWithTransactions(params.id)
@@ -23,14 +24,18 @@ const AccountsPage = async ({params}) => {
                 {account._count.transactions} transactions
             </p>
         </div>
+
+        {/* Chart Section */}
+
+    {/* Transaction Table */}
+    <Suspense>
+        <TransactionTable/>
+    </Suspense>
+
     </div>
 
-    // Chart Section
-
-    // Transaction Table
-
-  )
-}
+  );
+};
 
 export default AccountsPage
 
