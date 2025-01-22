@@ -6,8 +6,15 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { categoryColors } from '@/data/categories';
 import { format } from 'date-fns';
-import { Clock } from 'lucide-react';
+import { Clock, RefreshCcw, RefreshCw } from 'lucide-react';
 import React from 'react'
+
+const RECURRING_INTERVALS = {
+    DAILY: "Daily",
+    WEEKLY: "Weekly",
+    MONTHLY: "Monthly",
+    YEARLY: "Yearly",
+};
 
 const TransactionTable = ({ transactions }) => {
 
@@ -91,9 +98,21 @@ const TransactionTable = ({ transactions }) => {
                                     {transaction.isRecurring?(
                                         <TooltipProvider>
                                             <Tooltip>
-                                            <TooltipTrigger>Hover</TooltipTrigger>
+                                            <TooltipTrigger>
+                                                <Badge variant="outline" className="gap-1">
+                                                    <RefreshCw className="gap-1 bg-purple-100 text-purple-800 hover:bg-purple-200"/>
+                                                    {RECURRING_INTERVALS[transaction.RECURRING_INTERVALS
+                                                    ]
+                                                    }
+                                                </Badge>
+                                            </TooltipTrigger>
                                             <TooltipContent>
-                                                <p>Add to library</p>
+                                                <div>
+                                                    <div>Next Date:</div>
+                                                    <div>
+                                                    {format(new Date(transaction.nextRecurringDate), "PP")}
+                                                    </div>
+                                                </div>
                                             </TooltipContent>
                                             </Tooltip>
                                       </TooltipProvider>
