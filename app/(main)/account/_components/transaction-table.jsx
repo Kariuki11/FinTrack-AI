@@ -2,6 +2,8 @@
 
 import { Checkbox } from '@/components/ui/checkbox';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { categoryColors } from '@/data/categories';
+import { format } from 'date-fns';
 import React from 'react'
 
 const TransactionTable = ({ transactions }) => {
@@ -62,8 +64,18 @@ const TransactionTable = ({ transactions }) => {
                                 <TableCell>
                                     {format(new Date(transaction.date), "PP")}
                                 </TableCell>
-                                <TableCell>Credit Card</TableCell>
-                                <TableCell className="text-right">$250.00</TableCell>
+                                <TableCell>{transaction.description}</TableCell>
+                                <TableCell className="capitalize">
+                                    <span
+                                        style={{
+                                            background: categoryColors[transaction.category],
+                                        }}
+                                        className='px-2 py-1 rounded text-white text-sm'
+                                    >
+                                        {transaction.category}
+                                    </span>
+                                    </TableCell>
+                                <TableCell className="text-right">{transaction.amount.toFixed(2)}</TableCell>
                             </TableRow>
                         ))
                     )}
@@ -77,3 +89,5 @@ const TransactionTable = ({ transactions }) => {
 
 export default TransactionTable;
 
+
+//2hrs 45 minutes 32 seconds
