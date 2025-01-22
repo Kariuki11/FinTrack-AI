@@ -1,9 +1,12 @@
 "use client";
 
+import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { categoryColors } from '@/data/categories';
 import { format } from 'date-fns';
+import { Clock } from 'lucide-react';
 import React from 'react'
 
 const TransactionTable = ({ transactions }) => {
@@ -75,7 +78,32 @@ const TransactionTable = ({ transactions }) => {
                                         {transaction.category}
                                     </span>
                                     </TableCell>
-                                <TableCell className="text-right">{transaction.amount.toFixed(2)}</TableCell>
+                                <TableCell 
+                                    className="text-right font-bold"
+                                    style={{
+                                        color: transaction.type === "EXPENSE" ? "red" : "green"
+                                    }}
+                                >
+                                    {transaction.type==='EXPENSE' ? '-' : '+'}
+                                    ${transaction.amount.toFixed(2)}
+                                </TableCell>
+                                <TableCell>
+                                    {transaction.isRecurring?(
+                                        <TooltipProvider>
+                                            <Tooltip>
+                                            <TooltipTrigger>Hover</TooltipTrigger>
+                                            <TooltipContent>
+                                                <p>Add to library</p>
+                                            </TooltipContent>
+                                            </Tooltip>
+                                      </TooltipProvider>
+                                    ) : (
+                                        <Badge variant="outline" className="gap-1">
+                                            <Clock className="h-2 w-2"/>
+                                            One-time
+                                        </Badge>
+                                    )}
+                                </TableCell>
                             </TableRow>
                         ))
                     )}
@@ -90,4 +118,4 @@ const TransactionTable = ({ transactions }) => {
 export default TransactionTable;
 
 
-//2hrs 45 minutes 32 seconds
+
