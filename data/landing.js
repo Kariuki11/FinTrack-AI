@@ -14,7 +14,7 @@ import {
       label: "Active Users",
     },
     {
-      value: "$1B+",
+      value: "$1M+",
       label: "Transactions made",
     },
     {
