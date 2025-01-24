@@ -6,8 +6,8 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { categoryColors } from '@/data/categories';
 import { format } from 'date-fns';
-import { Clock, MoreHorizontal, RefreshCcw, RefreshCw } from 'lucide-react';
-import React from 'react'
+import { ChevronUp, ChevronDown, Clock, MoreHorizontal, RefreshCcw, RefreshCw } from 'lucide-react';
+import React, { useState } from 'react'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -29,10 +29,21 @@ const RECURRING_INTERVALS = {
 
 const TransactionTable = ({ transactions }) => {
     const router = useRouter();
+    const [selectedIds, setSelectedIds] = useState([]);
+    const [sortConfig, setSortConfig] = useState({
+        field: "date",
+        direction: "desc",
+    });
 
     const filteredAndSortedTransactions = transactions;
 
-    const handleSort = () => {};
+    const handleSort = (field) => {
+        setSortConfig(current=>({
+            field,
+            direction:
+                current.field==field && current.direction === "asc" ? "desc" : "asc",
+        }))
+    };
 
   return (
     <div className='space-y-4'>
@@ -51,7 +62,15 @@ const TransactionTable = ({ transactions }) => {
                             className="cursor-pointer"
                             onClick={() => handleSort("date")}
                         >
-                            <div className='flex items-center'>Date</div>
+                            <div className='flex items-center'>
+                                Date{" "}
+                                {sortConfig.field==='date' && 
+                                (sortConfig.direction==="asc"? (
+                                    <ChevronUp className='ml-1 h-4 w-4' />
+                                ) : (
+                                    <ChevronDown className="ml-1 h-4 w-4" />
+                                ))}
+                            </div>
                         </TableHead>
                         <TableHead>Description</TableHead>
                         <TableHead 
