@@ -17,6 +17,7 @@ import {
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
 import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
   
 
 const RECURRING_INTERVALS = {
@@ -27,6 +28,7 @@ const RECURRING_INTERVALS = {
 };
 
 const TransactionTable = ({ transactions }) => {
+    const router = useRouter();
 
     const filteredAndSortedTransactions = transactions;
 
@@ -160,12 +162,22 @@ const TransactionTable = ({ transactions }) => {
                                         </Button>
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent>
-                                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                                        <DropdownMenuLabel
+                                            onClick={() =>
+                                                router.push(
+                                                    `/transaction/create?edit=${transaction.id}`
+                                                )
+                                            }
+                                        >
+                                            Edit
+                                        </DropdownMenuLabel>
                                         <DropdownMenuSeparator />
-                                        <DropdownMenuItem>Profile</DropdownMenuItem>
-                                        <DropdownMenuItem>Billing</DropdownMenuItem>
-                                        <DropdownMenuItem>Team</DropdownMenuItem>
-                                        <DropdownMenuItem>Subscription</DropdownMenuItem>
+                                        <DropdownMenuItem 
+                                            className="text-destructive"
+                                            // onClick={()=>deleteFn([transaction.id])}
+                                        >
+                                            Delete
+                                        </DropdownMenuItem>
                                     </DropdownMenuContent>
                                 </DropdownMenu>
 
