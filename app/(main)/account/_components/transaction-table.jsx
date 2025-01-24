@@ -6,8 +6,18 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { categoryColors } from '@/data/categories';
 import { format } from 'date-fns';
-import { Clock, RefreshCcw, RefreshCw } from 'lucide-react';
+import { Clock, MoreHorizontal, RefreshCcw, RefreshCw } from 'lucide-react';
 import React from 'react'
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+  } from "@/components/ui/dropdown-menu"
+import { Button } from '@/components/ui/button';
+  
 
 const RECURRING_INTERVALS = {
     DAILY: "Daily",
@@ -107,8 +117,8 @@ const TransactionTable = ({ transactions }) => {
                                                 </Badge>
                                             </TooltipTrigger>
                                             <TooltipContent>
-                                                <div>
-                                                    <div>Next Date:</div>
+                                                <div className='text-sm'>
+                                                    <div className="font-medium">Next Date:</div>
                                                     <div>
                                                     {format(new Date(transaction.nextRecurringDate), "PP")}
                                                     </div>
@@ -123,6 +133,44 @@ const TransactionTable = ({ transactions }) => {
                                         </Badge>
                                     )}
                                 </TableCell>
+
+                                <TableCell>
+
+                                {/* <DropdownMenuContent>
+                                    <DropdownMenuTrigger asChild>
+                                        <Button variant="ghost" className="h-8 w-8 p-0">
+                                            <MoreHorizontal className="h-4 w-4"/>
+                                        </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent>
+                                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                                        <DropdownMenuSeparator />
+                                        <DropdownMenuItem>Profile</DropdownMenuItem>
+                                        <DropdownMenuItem>Billing</DropdownMenuItem>
+                                        <DropdownMenuItem>Team</DropdownMenuItem>
+                                        <DropdownMenuItem>Subscription</DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenuContent> */}
+
+
+                                <DropdownMenu>
+                                    <DropdownMenuTrigger asChild>
+                                        <Button variant="ghost" className="h-8 w-8 p-0">
+                                            <MoreHorizontal className="h-4 w-4" />
+                                        </Button>
+                                    </DropdownMenuTrigger>
+                                    <DropdownMenuContent>
+                                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                                        <DropdownMenuSeparator />
+                                        <DropdownMenuItem>Profile</DropdownMenuItem>
+                                        <DropdownMenuItem>Billing</DropdownMenuItem>
+                                        <DropdownMenuItem>Team</DropdownMenuItem>
+                                        <DropdownMenuItem>Subscription</DropdownMenuItem>
+                                    </DropdownMenuContent>
+                                </DropdownMenu>
+
+                                </TableCell>
+
                             </TableRow>
                         ))
                     )}
