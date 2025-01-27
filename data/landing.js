@@ -91,7 +91,7 @@ export const testimonialsData = [
       "The budgeting tools are phenomenal! They’ve helped me cut down on unnecessary expenses and grow my business profitably.",
   },
   {
-    name: "John Doe",
+    name: "Humphrey Johnson",
     role: "Remote Worker",
     image: "https://randomuser.me/api/portraits/men/50.jpg",
     quote:
@@ -104,6 +104,28 @@ export const testimonialsData = [
     quote:
       "The portfolio management feature has given me better control over my investments. This app is a must-have for serious investors.",
   },
+  {
+    name: "Samuel Wanjala",
+    role: "Freelance Designer",
+    image: "https://randomuser.me/api/portraits/men/51.jpg",
+    quote:
+      "This platform has completely changed how I handle my finances. The savings tracker is a game-changer for planning future projects.",
+  },
+  {
+    name: "Grace Njeri",
+    role: "Tech Enthusiast",
+    image: "https://randomuser.me/api/portraits/women/52.jpg",
+    quote:
+      "I love the automated insights feature! It feels like having a personal financial advisor available 24/7.",
+  },
+  {
+    name: "Ochieng Omondi",
+    role: "Software Engineer",
+    image: "https://randomuser.me/api/portraits/men/52.jpg",
+    quote:
+      "With global account support, I can easily manage my international transactions without stress. Truly a lifesaver!",
+  },
+
 ];
 
 
