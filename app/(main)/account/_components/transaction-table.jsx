@@ -6,7 +6,7 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { categoryColors } from '@/data/categories';
 import { format } from 'date-fns';
-import { ChevronUp, ChevronDown, Clock, MoreHorizontal, RefreshCcw, RefreshCw } from 'lucide-react';
+import { ChevronUp, ChevronDown, Clock, MoreHorizontal, RefreshCcw, RefreshCw, Search } from 'lucide-react';
 import React, { useState } from 'react'
 import {
     DropdownMenu,
@@ -18,6 +18,7 @@ import {
   } from "@/components/ui/dropdown-menu"
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
+import { Input } from '@/components/ui/input';
   
 
 const RECURRING_INTERVALS = {
@@ -34,6 +35,11 @@ const TransactionTable = ({ transactions }) => {
         field: "date",
         direction: "desc",
     });
+
+    const [searchTerm, setSearchTerm] = useState("");
+    const [typeFilter, setTypeFilter] = useState("");
+    const [recurringFilter, setRecurringFilter] = useState("");
+
 
 
     const filteredAndSortedTransactions = transactions;
@@ -66,6 +72,32 @@ const TransactionTable = ({ transactions }) => {
   return (
     <div className='space-y-4'>
         {/* Filters */}
+
+        <div className='flex flex-col sm:flex-row gap-4'>
+
+            <div className='relative flex-1'>
+                <Search className='absolute left-2 top-2.5 h-4 w-4 text-muted-foreground'/>
+                <Input
+                    placeholder="search a Transaction.."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className='pl-8'
+                />
+            </div>
+
+            <div>
+            <Select>
+                <SelectTrigger>
+                    <SelectValue placeholder="All Types" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectItem value="dark">Income</SelectItem>
+                    <SelectItem value="system">Expense</SelectItem>
+                </SelectContent>
+            </Select> 
+            </div>
+
+        </div>
 
         {/* Transactions */}
         <div className="rounded-md border">
@@ -265,3 +297,4 @@ export default TransactionTable;
 
 
 
+//3hrs 04minutes 53seconds
