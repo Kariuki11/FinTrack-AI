@@ -86,13 +86,26 @@ const TransactionTable = ({ transactions }) => {
             </div>
 
             <div>
-            <Select>
+            <Select value={typeFilter} onValueChange={setTypeFilter}>
                 <SelectTrigger>
                     <SelectValue placeholder="All Types" />
                 </SelectTrigger>
                 <SelectContent>
-                    <SelectItem value="dark">Income</SelectItem>
-                    <SelectItem value="system">Expense</SelectItem>
+                    <SelectItem value="INCOME">Income</SelectItem>
+                    <SelectItem value="EXPENSE">Expense</SelectItem>
+                </SelectContent>
+            </Select>
+
+            <Select
+                value={recurringFilter}
+                onValueChange={(value) => setRecurringFilter(value)}
+            >
+                <SelectTrigger>
+                    <SelectValue placeholder="All Transactions" />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectItem value="INCOME">Income</SelectItem>
+                    <SelectItem value="EXPENSE">Expense</SelectItem>
                 </SelectContent>
             </Select> 
             </div>
