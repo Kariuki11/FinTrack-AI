@@ -19,7 +19,14 @@ import {
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { Input } from '@/components/ui/input';
-  
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+  } from "@/components/ui/select"
+    
 
 const RECURRING_INTERVALS = {
     DAILY: "Daily",
@@ -100,12 +107,12 @@ const TransactionTable = ({ transactions }) => {
                 value={recurringFilter}
                 onValueChange={(value) => setRecurringFilter(value)}
             >
-                <SelectTrigger>
+                <SelectTrigger className="w-[130px]">
                     <SelectValue placeholder="All Transactions" />
                 </SelectTrigger>
                 <SelectContent>
                     <SelectItem value="INCOME">Income</SelectItem>
-                    <SelectItem value="EXPENSE">Expense</SelectItem>
+                    <SelectItem value="Non-Recurring">Non-Recurring</SelectItem>
                 </SelectContent>
             </Select> 
             </div>
@@ -310,4 +317,3 @@ export default TransactionTable;
 
 
 
-//3hrs 04minutes 53seconds
