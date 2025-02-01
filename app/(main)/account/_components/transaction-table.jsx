@@ -257,22 +257,6 @@ const TransactionTable = ({ transactions }) => {
 
                                 <TableCell>
 
-                                {/* <DropdownMenuContent>
-                                    <DropdownMenuTrigger asChild>
-                                        <Button variant="ghost" className="h-8 w-8 p-0">
-                                            <MoreHorizontal className="h-4 w-4"/>
-                                        </Button>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent>
-                                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                                        <DropdownMenuSeparator />
-                                        <DropdownMenuItem>Profile</DropdownMenuItem>
-                                        <DropdownMenuItem>Billing</DropdownMenuItem>
-                                        <DropdownMenuItem>Team</DropdownMenuItem>
-                                        <DropdownMenuItem>Subscription</DropdownMenuItem>
-                                    </DropdownMenuContent>
-                                </DropdownMenuContent> */}
-
 
                                 <DropdownMenu>
                                     <DropdownMenuTrigger asChild>
