@@ -6,7 +6,7 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { categoryColors } from '@/data/categories';
 import { format } from 'date-fns';
-import { ChevronUp, ChevronDown, Clock, MoreHorizontal, RefreshCcw, RefreshCw, Search } from 'lucide-react';
+import { ChevronUp, ChevronDown, Clock, MoreHorizontal, RefreshCcw, RefreshCw, Search, Trash, X } from 'lucide-react';
 import React, { useState } from 'react'
 import {
     DropdownMenu,
@@ -49,7 +49,23 @@ const TransactionTable = ({ transactions }) => {
 
 
 
-    const filteredAndSortedTransactions = transactions;
+    const filteredAndSortedTransactions = useMemo(() => {
+        let result = [...transactions];
+
+        //Search Filter Application.
+        if (searchTerm) {
+            const searchLower = searchTerm.toLowerCase();
+            
+        }
+
+        return result;
+    }, [
+        transactions,
+        searchTerm,
+        typeFilter,
+        recurringFilter,
+        sortConfig,
+    ]);
 
     const handleSort = (field) => {
         setSortConfig(current=>({
@@ -75,6 +91,15 @@ const TransactionTable = ({ transactions }) => {
     );
     };
 
+    const handleBulkDelete =() => {};
+
+    const handleClearFilters= () => {
+        setSearchTerm("");
+        setTypeFilter("");
+        setRecurringFilter("");
+        setSelectedIds([]);
+    };
+
 
   return (
     <div className='space-y-4'>
@@ -92,7 +117,7 @@ const TransactionTable = ({ transactions }) => {
                 />
             </div>
 
-            <div>
+            <div className='flex gap-2'>
             <Select value={typeFilter} onValueChange={setTypeFilter}>
                 <SelectTrigger>
                     <SelectValue placeholder="All Types" />
@@ -107,7 +132,7 @@ const TransactionTable = ({ transactions }) => {
                 value={recurringFilter}
                 onValueChange={(value) => setRecurringFilter(value)}
             >
-                <SelectTrigger className="w-[130px]">
+                <SelectTrigger className="w-[150px]">
                     <SelectValue placeholder="All Transactions" />
                 </SelectTrigger>
                 <SelectContent>
@@ -116,6 +141,24 @@ const TransactionTable = ({ transactions }) => {
                 </SelectContent>
             </Select> 
             </div>
+
+            {selectedIds.length> 0 && (
+                <div className='flex items-center gap-2'>
+                    <Button 
+                        variant="destructive"
+                        size="sm"
+                        onClick={handleBulkDelete}
+                    >
+                        <Trash className='h-4 w-4 mr-2'/>
+                        Delete selected Items ({selectedIds.length})
+                    </Button>
+                </div>)}
+
+                {(searchTerm || typeFilter || recurringFilter) &&(
+                    <Button variant="outline" size="icon" onClick={handleClearFilters} title="Clear Filters">
+                        <X className='h-4 w-5'/>
+                    </Button>
+                )}
 
         </div>
 
