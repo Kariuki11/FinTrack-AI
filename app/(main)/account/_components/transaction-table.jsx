@@ -353,6 +353,5 @@ const TransactionTable = ({ transactions }) => {
 export default TransactionTable;
 
 
-//3hrs 15 minutes 10 seconds
 
 
