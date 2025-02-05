@@ -7,7 +7,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { categoryColors } from '@/data/categories';
 import { format } from 'date-fns';
 import { ChevronUp, ChevronDown, Clock, MoreHorizontal, RefreshCcw, RefreshCw, Search, Trash, X } from 'lucide-react';
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -55,7 +55,17 @@ const TransactionTable = ({ transactions }) => {
         //Search Filter Application.
         if (searchTerm) {
             const searchLower = searchTerm.toLowerCase();
-            
+            result = result.filter((transaction) =>
+                transaction.description?.toLowerCase().includes(searchLower)
+            );
+        }
+
+        //Recurring Filter.
+        if (recurringFilter) {
+            result = result.filter((transaction) => {
+                if (recurringFilter === "recurring") return transaction.isRecurring;
+                return !transaction.isRecurring;
+            });
         }
 
         return result;
@@ -136,7 +146,7 @@ const TransactionTable = ({ transactions }) => {
                     <SelectValue placeholder="All Transactions" />
                 </SelectTrigger>
                 <SelectContent>
-                    <SelectItem value="INCOME">Income</SelectItem>
+                    <SelectItem value="RECURRING">Recurring</SelectItem>
                     <SelectItem value="Non-Recurring">Non-Recurring</SelectItem>
                 </SelectContent>
             </Select> 
