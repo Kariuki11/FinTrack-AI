@@ -5,7 +5,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { categoryColors } from '@/data/categories';
-import { format } from 'date-fns';
+import { format, secondsToHours } from 'date-fns';
 import { ChevronUp, ChevronDown, Clock, MoreHorizontal, RefreshCcw, RefreshCw, Search, Trash, X } from 'lucide-react';
 import React, { useMemo, useState } from 'react'
 import {
@@ -146,8 +146,8 @@ const TransactionTable = ({ transactions }) => {
                     <SelectValue placeholder="All Transactions" />
                 </SelectTrigger>
                 <SelectContent>
-                    <SelectItem value="RECURRING">Recurring</SelectItem>
-                    <SelectItem value="Non-Recurring">Non-Recurring</SelectItem>
+                    <SelectItem value="recurring">recurring</SelectItem>
+                    <SelectItem value="Non-recurring">Non-Recurring</SelectItem>
                 </SelectContent>
             </Select> 
             </div>
@@ -351,6 +351,8 @@ const TransactionTable = ({ transactions }) => {
 }
 
 export default TransactionTable;
+
+
 
 
 
