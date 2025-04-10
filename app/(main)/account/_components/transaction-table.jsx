@@ -355,5 +355,12 @@ export default TransactionTable;
 
 
 
+//3hrs 15 minutes 18 seconds
 
+
+// if (recurringFilter) {
+//     result = result.filter((transaction) => {
+//       if (recurringFilter === "recurring") return transaction.isRecurring;
+//       return !transaction.isRecurring;
+//     });
 
