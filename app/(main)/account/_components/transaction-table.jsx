@@ -7,7 +7,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { categoryColors } from '@/data/categories';
 import { format, secondsToHours } from 'date-fns';
 import { ChevronUp, ChevronDown, Clock, MoreHorizontal, RefreshCcw, RefreshCw, Search, Trash, X } from 'lucide-react';
-import React, { useMemo, useState } from 'react'
+import React, { use, useMemo, useState } from 'react'
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -26,6 +26,9 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
+import { bulkDeleteTransactions } from '@/actions/accounts';
+import { toast } from 'sonner';
+import { BarLoader } from 'react-spinners';
     
 
 const RECURRING_INTERVALS = {
@@ -46,6 +49,23 @@ const TransactionTable = ({ transactions }) => {
     const [searchTerm, setSearchTerm] = useState("");
     const [typeFilter, setTypeFilter] = useState("");
     const [recurringFilter, setRecurringFilter] = useState("");
+
+    const { 
+        loading: deleteLoading,
+        fn: deleteFn,
+        data: deleted,
+    } = useFetch(bulkDeleteTransactions);
+
+    // const handleBulkDelete = async () => {
+    //     if (
+    //         !window.confirm(
+    //             `Are you sure you want to delete ${selectedIds.length} transactions?`
+    //         )
+    //     ) {
+    //         return;
+    //     }
+    //     deleteFn(selectedIds);
+    // }
 
 
 
@@ -127,7 +147,23 @@ const TransactionTable = ({ transactions }) => {
     );
     };
 
-    const handleBulkDelete =() => {};
+    const handleBulkDelete =() => {
+        if (
+            !window.confirm(
+                `Are you sure you want to delete ${selectedIds.length} transactions?`
+            )
+        ) {
+            return;
+        }
+        deleteFn(selectedIds);
+    }
+    };
+
+    useEffect(() => {
+        if (deleted && !deleteLoading) {
+            toast.error("Transactions Successfully Deleted");
+        }
+    },[deleted, deleteLoading])
 
     const handleClearFilters= () => {
         setSearchTerm("");
@@ -139,6 +175,7 @@ const TransactionTable = ({ transactions }) => {
 
   return (
     <div className='space-y-4'>
+        <BarLoader className='mt-4' width={"100%"} color='#9333ea' />
         {/* Filters */}
 
         <div className='flex flex-col sm:flex-row gap-4'>

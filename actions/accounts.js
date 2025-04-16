@@ -161,7 +161,12 @@ export async function bulkDeleteTransactions(transactionIds) {
             }
 
         })
+
+        // Revalidate the dashboard if necessary
+        revalidatePath("/dashboard");
+        revalidatePath('/account/[id]');
     } catch (error) {
+        return { success: false, error: error.message };
 
     }
 }
