@@ -68,6 +68,32 @@ const TransactionTable = ({ transactions }) => {
             });
         }
 
+        //Apply type filter
+        if (typeFilter) {
+            result = result.filter((transaction) => transaction.type === typeFilter);
+        }
+
+        // Apply sorting
+        result.sort((a, b) => {
+            let comparison = 0;
+
+            switch (sortConfig.field) {
+                case "date":
+                    comparison = new Date(a.date) - new Date(b.date);
+                    break;
+                case "category":
+                    comparison = a.category.localeCompare(b.category);
+                    break;
+                case "amount":
+                    comparison = a.amount - b.amount;
+                    break;
+
+                default:
+                    comparison = 0;
+            }
+            return sortConfig.direction === "asc" ? comparison : -comparison;
+        });
+
         return result;
     }, [
         transactions,
