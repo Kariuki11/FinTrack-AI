@@ -29,6 +29,11 @@ import {
 import { bulkDeleteTransactions } from '@/actions/accounts';
 import { toast } from 'sonner';
 import { BarLoader } from 'react-spinners';
+//import useFetch from '@/hooks/useFetch'; // adjust path based on where it's located
+//import useFetch from "@/hooks/use fetch";
+import useFetch from '@/hooks/use fetch';
+import{ useEffect } from 'react';
+
     
 
 const RECURRING_INTERVALS = {
@@ -157,7 +162,6 @@ const TransactionTable = ({ transactions }) => {
         }
         deleteFn(selectedIds);
     }
-    };
 
     useEffect(() => {
         if (deleted && !deleteLoading) {
