@@ -105,3 +105,41 @@ export async function getAccountWithTransactions(accountId) {
 
 
 
+export async function bulkDeleteTransactions(transactionIds) {
+    try {
+        const { userId } = await auth();
+        if (!userId) throw new Error("Not Authorized");
+
+        // if (!accountId) {
+        //     throw new Error("Invalid accountId");
+        // }
+
+        const user = await db.user.findUnique({
+            where: { clerkUserId: userId },
+        });
+        if (!user) {
+            throw new Error("No User Found");
+        }
+
+        const transactions = await db.transaction.findMany({
+            where: {
+                id: { in: transactionIds },
+                user: user.id,
+            },
+        });
+
+        const accountBalanceChanges = transactions.reduce((acc,transaction)=>{
+            const change =
+                transaction.type === "EXPENSE"
+                    ? transaction.amount
+                    : -transaction.amount;
+
+            acc[transaction.accountId] = (acc[transaction.accountId] || 0) + change;
+            return acc;
+        }, {});
+        // Delete Transactions and Update account balances in each Transaction.
+
+    } catch (error) {
+
+    }
+}
