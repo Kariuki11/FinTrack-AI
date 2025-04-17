@@ -179,7 +179,9 @@ const TransactionTable = ({ transactions }) => {
 
   return (
     <div className='space-y-4'>
-        <BarLoader className='mt-4' width={"100%"} color='#9333ea' />
+        {deleteLoading && (
+            <BarLoader className='mt-4' width={"100%"} color='#9333ea' />
+            )}
         {/* Filters */}
 
         <div className='flex flex-col sm:flex-row gap-4'>
@@ -229,7 +231,8 @@ const TransactionTable = ({ transactions }) => {
                         <Trash className='h-4 w-4 mr-2'/>
                         Delete selected Items ({selectedIds.length})
                     </Button>
-                </div>)}
+                </div>
+            )}
 
                 {(searchTerm || typeFilter || recurringFilter) &&(
                     <Button variant="outline" size="icon" onClick={handleClearFilters} title="Clear Filters">
@@ -385,7 +388,7 @@ const TransactionTable = ({ transactions }) => {
                                         </Button>
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent>
-                                        <DropdownMenuLabel
+                                        <DropdownMenuItem
                                             onClick={() =>
                                                 router.push(
                                                     `/transaction/create?edit=${transaction.id}`
@@ -393,11 +396,11 @@ const TransactionTable = ({ transactions }) => {
                                             }
                                         >
                                             Edit
-                                        </DropdownMenuLabel>
+                                        </DropdownMenuItem>
                                         <DropdownMenuSeparator />
                                         <DropdownMenuItem 
                                             className="text-destructive"
-                                            // onClick={()=>deleteFn([transaction.id])}
+                                            onClick={()=>deleteFn([transaction.id])}
                                         >
                                             Delete
                                         </DropdownMenuItem>
