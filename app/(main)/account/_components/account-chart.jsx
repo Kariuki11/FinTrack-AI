@@ -30,6 +30,11 @@ const AccountChat = ({transactions}) => {
             ? startOfDay(subdays(now, range.days)) 
             : startOfDay(new Date(0));
 
+        //Filter Transactions with Dates
+        const filtered = transactions.filter(
+            (t) => new Date(t.date) >= startDate && new Date(t.date) <= endOfDay(now)
+    );
+
     },[transactions, dateRange])
 
   return (
