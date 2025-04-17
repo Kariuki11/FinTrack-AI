@@ -422,7 +422,7 @@ export default TransactionTable;
 
 
 
-//3hrs 15 minutes 18 seconds
+//3hrs 24 minutes 18 seconds
 
 
 // if (recurringFilter) {
