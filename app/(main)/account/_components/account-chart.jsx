@@ -80,9 +80,11 @@ const AccountChart = ({ transactions }) => {
                 <SelectValue placeholder="Range" />
               </SelectTrigger>
               <SelectContent>{Object.entries(DATE_RANGES).map(([key, {label}]) => {
-                <SelectItem key={key} value={key}>
+                return (
+                  <SelectItem key={key} value={key}>
                   {label}
                 </SelectItem>
+                )
               })}
               </SelectContent>
             </Select>
