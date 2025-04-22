@@ -56,6 +56,16 @@ const AccountChart = ({ transactions }) => {
     );
   }, [transactions, dateRange]);
 
+  const totals = useMemo(() => {
+    return filteredData.reduce(
+      (acc, transaction) => ({
+        income: acc.income +Day.income,
+        expense: acc.expense + transaction.expense,
+      })
+    )
+  })
+
+
   return (
     <div>
       {/* 
