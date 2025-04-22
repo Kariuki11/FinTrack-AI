@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react'
+import { endOfDay, format, startOfDay, subDays } from 'date-fns';
 import {
     Bar,
     BarChart, 
@@ -35,6 +36,14 @@ const AccountChat = ({transactions}) => {
             (t) => new Date(t.date) >= startDate && new Date(t.date) <= endOfDay(now)
     );
 
+    const grouped = filtered.reduce((acc, transaction) => {
+      const date = format(new Date(transaction.date), 'yyyy-MM-dd');
+
+      if (!acc[date]) {
+        acc[date] = { date, income: 0, expense: 0 };
+      }
+    })
+
     },[transactions, dateRange])
 
   return (
@@ -61,3 +70,5 @@ const AccountChat = ({transactions}) => {
 
           3hrs 33 minutes
         </BarChart>
+        </ResponsiveContainer> */}
+    </div>
