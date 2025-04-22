@@ -12,6 +12,7 @@ import {
   YAxis,
 } from 'recharts';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const DATE_RANGES = {
   "7D": { label: "last 7 Days", days: 7 },
@@ -74,16 +75,17 @@ const AccountChart = ({ transactions }) => {
       <Card>
         <CardHeader>
           <CardTitle>Transaction Overview</CardTitle>
-          <Select>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Theme" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="light">Light</SelectItem>
-              <SelectItem value="dark">Dark</SelectItem>
-              <SelectItem value="system">System</SelectItem>
-            </SelectContent>
-          </Select>
+            <Select defaultValue={dateRange} onValueChange={setDateRange}>
+              <SelectTrigger className="w-[120px]">
+                <SelectValue placeholder="Range" />
+              </SelectTrigger>
+              <SelectContent>{Object.entries(DATE_RANGES).map(([key, {label}]) => {
+                <SelectItem key={key} value={key}>
+                  {label}
+                </SelectItem>
+              })}
+              </SelectContent>
+            </Select>
 
         </CardHeader>
         <CardContent>
@@ -103,10 +105,11 @@ const AccountChart = ({ transactions }) => {
         </BarChart>
       </ResponsiveContainer> 
       */}
-        </CardContent>
+        {/* </CardContent>
         <CardFooter>
           <p>Card Footer</p>
-        </CardFooter>
+        </CardFooter> */}
+        </CardContent>
       </Card>
 
       <p>Chart is currently commented out.</p>
