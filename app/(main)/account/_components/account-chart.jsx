@@ -11,6 +11,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 const DATE_RANGES = {
   "7D": { label: "last 7 Days", days: 7 },
@@ -61,13 +62,31 @@ const AccountChart = ({ transactions }) => {
       (acc, transaction) => ({
         income: acc.income +Day.income,
         expense: acc.expense + transaction.expense,
-      })
-    )
-  })
+      }),
+      { income: 0, expense: 0 }
+    );
+  }, [filteredData]);
 
 
   return (
     <div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Transaction Overview</CardTitle>
+          <Select>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Theme" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="light">Light</SelectItem>
+              <SelectItem value="dark">Dark</SelectItem>
+              <SelectItem value="system">System</SelectItem>
+            </SelectContent>
+          </Select>
+
+        </CardHeader>
+        <CardContent>
       {/* 
       <ResponsiveContainer width="100%" height={300}>
         <BarChart
@@ -84,6 +103,12 @@ const AccountChart = ({ transactions }) => {
         </BarChart>
       </ResponsiveContainer> 
       */}
+        </CardContent>
+        <CardFooter>
+          <p>Card Footer</p>
+        </CardFooter>
+      </Card>
+
       <p>Chart is currently commented out.</p>
     </div>
   );
