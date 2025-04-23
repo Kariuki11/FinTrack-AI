@@ -58,3 +58,19 @@ export async function getCurrentBudget(accountId) {
         throw error;
     }
 }
+
+export async function updateBudget(amount) {
+    try {
+        const { userId } = await auth();
+        if (!userId) throw new Error("Not Authorized");
+        
+        const user = await db.user.findUnique({
+            where: { clerkUserId: userId },
+        });
+        if (!user) {
+            throw new Error("No User Found");
+        }
+    } catch (error) {
+
+    }
+}
