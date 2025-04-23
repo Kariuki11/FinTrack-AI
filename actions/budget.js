@@ -27,6 +27,34 @@ export async function getCurrentBudget(accountId) {
             currentDate.getMonth(),
             1
         );
+        const endOfMonth = new Date(
+            currentDate.getFullYear(),
+            currentDate.getMonth() + 1,
+            0
+        );
 
-    } catch (error) {}
+        const expenses = await db.transaction.aggregate({
+            where: {
+                userId: user.id,
+                type: "EXPENSE",
+                date: {
+                    gte: startOfMonth,
+                    lte: endOfMonth,
+                },
+                accountId,
+            },
+            _sum: {
+                amount: true,
+            },
+        });
+
+        return {
+            budget: budget ? { ...budget, amount: budget.amount.toNumber() } : null,
+            currentExpenses: expenses._sum.amount
+                ? expenses._sum.amount.toNumber()
+                : 0,
+        };
+    } catch (error) { console.error("Error fetching budget:", error);
+        throw error;
+    }
 }
