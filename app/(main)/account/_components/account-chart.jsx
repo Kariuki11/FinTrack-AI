@@ -73,8 +73,8 @@ const AccountChart = ({ transactions }) => {
     <div>
 
       <Card>
-        <CardHeader>
-          <CardTitle>Transaction Overview</CardTitle>
+        <CardHeader className= "flex flex-row items-center justify-between space-y-0 pb-7">
+          <CardTitle className="text-base font-bold">Transaction Overview</CardTitle>
             <Select defaultValue={dateRange} onValueChange={setDateRange}>
               <SelectTrigger className="w-[120px]">
                 <SelectValue placeholder="Range" />
@@ -91,6 +91,29 @@ const AccountChart = ({ transactions }) => {
 
         </CardHeader>
         <CardContent>
+
+          <div className="">
+            <div className=" text-center">
+              <p className="text-muted-foreground>">Total Expense</p>
+              <p className="text-lg font-bold text-red-500"> 
+                ${totals.expense.toFixed(2)}
+                </p>
+            </div>
+
+            <div className=" text-center">
+              <p className="text-muted-foreground>">Total Income</p>
+              <p className="text-lg font-bold text-green-500">
+                ${totals.income.toFixed(2)}
+              </p>
+            </div>
+
+            <div className=" text-center">
+              <p className="text-muted-foreground>">Total Expense</p>
+              <p className="text-lg font-bold text-green-500"> 
+                ${(totals.income - totals.expense).toFixed(2)}
+              </p>
+            </div>
+          </div>
       {/* 
       <ResponsiveContainer width="100%" height={300}>
         <BarChart
