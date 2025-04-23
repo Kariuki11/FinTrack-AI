@@ -92,14 +92,7 @@ const AccountChart = ({ transactions }) => {
         </CardHeader>
         <CardContent>
 
-          <div className="">
-            <div className=" text-center">
-              <p className="text-muted-foreground>">Total Expense</p>
-              <p className="text-lg font-bold text-red-500"> 
-                ${totals.expense.toFixed(2)}
-                </p>
-            </div>
-
+          <div className="flex justify-around mb-6 text-sm">
             <div className=" text-center">
               <p className="text-muted-foreground>">Total Income</p>
               <p className="text-lg font-bold text-green-500">
@@ -109,31 +102,40 @@ const AccountChart = ({ transactions }) => {
 
             <div className=" text-center">
               <p className="text-muted-foreground>">Total Expense</p>
-              <p className="text-lg font-bold text-green-500"> 
+              <p className="text-lg font-bold text-red-500"> 
+                ${totals.expense.toFixed(2)}
+                </p>
+            </div>
+
+            <div className=" text-center">
+              <p className="text-muted-foreground>">Total Expense</p>
+              <p className={`text-lg font-bold ${
+                totals.income - totals.expense >= 0
+                 ? "text-green-500"
+                  : "text-red-500"
+              }`}
+              > 
                 ${(totals.income - totals.expense).toFixed(2)}
               </p>
             </div>
           </div>
-      {/* 
-      <ResponsiveContainer width="100%" height={300}>
-        <BarChart
-          data={filteredData}
-          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="date" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="income" fill="#4caf50" />
-          <Bar dataKey="expense" fill="#f44336" />
-        </BarChart>
-      </ResponsiveContainer> 
-      */}
-        {/* </CardContent>
-        <CardFooter>
-          <p>Card Footer</p>
-        </CardFooter> */}
+
+          <div className="h-[300px]">
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart
+                data={filteredData}
+                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="income" fill="#4caf50" />
+                <Bar dataKey="expense" fill="#f44336" />
+              </BarChart>
+            </ResponsiveContainer> 
+      </div>
         </CardContent>
       </Card>
 
