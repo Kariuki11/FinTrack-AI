@@ -62,7 +62,8 @@ const AccountChart = ({ transactions }) => {
   const totals = useMemo(() => {
     return filteredData.reduce(
       (acc, transaction) => ({
-        income: acc.income +Day.income,
+        // income: acc.income +Day.income,
+        income: acc.income + transaction.income,
         expense: acc.expense + transaction.expense,
       }),
       { income: 0, expense: 0 }
@@ -130,11 +131,25 @@ const AccountChart = ({ transactions }) => {
 
                 <CartesianGrid strokeDasharray="3 3" vertical={false}/>
                 <XAxis dataKey="date" />
-                <YAxis tickFormatter={(value) => `$${value}`}/>
-                <Tooltip />
+                <YAxis
+                  fontSize={13}
+                  tickLine={false}
+                  axisLine={false}
+                  tickFormatter={(value) => `$${value}`}/>
+                <Tooltip formatter={(value) => [`$${value}`, undefined]} />
                 <Legend />
-                <Bar dataKey="pv" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
-                <Bar dataKey="uv" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} />
+                <Bar
+                  dataKey="income"
+                  fill="#22c55e"
+                  radius={[4, 4, 0, 0]}
+                  //activeBar={<Rectangle fill="pink" stroke="blue" />} 
+                />
+                <Bar
+                  dataKey="expense"
+                  fill="#ef4444"
+                  radius={[4, 4, 0, 0]}
+                  //activeBar={<Rectangle fill="gold" stroke="purple" />}
+                />
                 {/* <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="name" />
                 <YAxis />
@@ -147,8 +162,6 @@ const AccountChart = ({ transactions }) => {
       </div>
         </CardContent>
       </Card>
-
-      <p>Chart is currently commented out.</p>
     </div>
   );
 };
