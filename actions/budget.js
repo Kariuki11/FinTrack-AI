@@ -93,6 +93,10 @@ export async function updateBudget(amount) {
         };
 
     } catch (error) {
-
+        console.error("Error updating Budget:", error);
+        return {
+            success: false,
+            error: error.message,
+        };
     }
 }
