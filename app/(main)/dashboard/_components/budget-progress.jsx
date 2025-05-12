@@ -11,7 +11,7 @@ import {
   } from "@/components/ui/card"
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Check, X } from 'lucide-react';
+import { Check, Pencil, X } from 'lucide-react';
   
 
 const BudgetProgress = ({ initialBudget, currentExpenses }) => {
@@ -41,7 +41,7 @@ const BudgetProgress = ({ initialBudget, currentExpenses }) => {
                             onChange={(e) => setNewBudget(e.target.value)}
                             className="w-28"
                             placeholder="Enter new budget"
-                            autofocus
+                            autoFocus
                         />
                         <Button variant="ghost" size="icon" onClick ={handleUpdateBudget}>
                             <Check className='h-4 w-4 text-green-700'/>
@@ -59,6 +59,15 @@ const BudgetProgress = ({ initialBudget, currentExpenses }) => {
                                 )} of $${initialBudget.amount.toFixed(2)} spent`
                                 : "No budget set"}
                         </CardDescription>
+
+                        <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => setIsEditing(true)}
+                            className="h-6 w-6"
+                        >
+                            <Pencil className="h-4 w-4 text-blue-700" />
+                        </Button>
                     </>
                 )}
             </div>
