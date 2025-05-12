@@ -20,6 +20,12 @@ const Dashboard = async () => {
   return (
     <div className="px-5">
         {/* Budget Progress */}
+        {defaultAccount && (
+          <BudgetProgress
+            initialBudget={budgetData?.budget}
+            currentExpenses={budgetData?.currentExpenses || 0}
+          />
+        )}
 
         {/* Overview */}
 
