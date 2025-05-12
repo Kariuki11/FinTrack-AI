@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useState } from 'react'
 import {
     Card,
@@ -22,6 +24,10 @@ const BudgetProgress = ({ initialBudget, currentExpenses }) => {
         ? (currentExpenses / initialBudget.amount) * 100
         : 0;
 
+        const handleUpdateBudget=()=>{}
+
+        const handleCancel=()=>{}
+
   return (
     <Card>
         <CardHeader>
@@ -37,18 +43,25 @@ const BudgetProgress = ({ initialBudget, currentExpenses }) => {
                             placeholder="Enter new budget"
                             autofocus
                         />
-                        <Button variant="ghost" size="icon">
-                            <Check/>
+                        <Button variant="ghost" size="icon" onClick ={handleUpdateBudget}>
+                            <Check className='h-4 w-4 text-green-700'/>
                         </Button >
-                        <Button variant="ghost" size="icon">
-                            <X/>
+                        <Button variant="ghost" size="icon" onClick={handleCancel}>
+                            <X className='h-4 w-4 text-red-700'/>
                         </Button>
                     </div>
                 ) : (
-                    <></>
+                    <>
+                        <CardDescription>
+                            {initialBudget
+                                ? `$${currentExpenses.toFixed(
+                                    2
+                                )} of $${initialBudget.amount.toFixed(2)} spent`
+                                : "No budget set"}
+                        </CardDescription>
+                    </>
                 )}
             </div>
-            <CardDescription>Card Description</CardDescription>
         </CardHeader>
         <CardContent>
             <p>Card Content</p>
