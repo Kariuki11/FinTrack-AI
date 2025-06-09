@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Card,
     CardContent,
@@ -13,7 +13,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Check, Pencil, X } from 'lucide-react';
 import { toast } from 'sonner';
-  
+import useFetch from '@/hooks/use fetch';
+import { updateBudget } from "@/actions/budget";
 
 const BudgetProgress = ({ initialBudget, currentExpenses }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -42,7 +43,20 @@ const BudgetProgress = ({ initialBudget, currentExpenses }) => {
             }
 
             await updateBudgetFn(amount);
-        }
+        };
+
+        useEffect(() => {
+            if (updatedBudget?.success) {
+                setIsEditing(false);
+                toast.success("Budget updated successfully!");
+            }
+        }, [updatedBudget]);
+
+        useEffect(() => {
+            if (error) {
+                toast.error(error.message || "Failed to update budget. Please try again.");
+            }
+        }, [error]);
 
         const handleCancel=()=>{
             setNewBudget(initialBudget?.amount?.toString() || "");
@@ -108,4 +122,6 @@ const BudgetProgress = ({ initialBudget, currentExpenses }) => {
 }
 
 export default BudgetProgress
+
+//3hrs 57 minutes
 
